@@ -222,14 +222,8 @@ bindsym $mod+Shift+c mode "resize"
 
 
 exec waybar
-exec swayfx
-
 for_window [class=".*"] border none
 
-# SwayFX
-
-blur enable
-corner_radius 7
 
 for_window [app_id="^.*"] border pixel 2
 
