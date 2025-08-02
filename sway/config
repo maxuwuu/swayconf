@@ -8,7 +8,7 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod1
-# Home row direction keys, like vim
+# Home row direction keys, 
 set $left h
 set $down j
 set $up k
@@ -19,7 +19,7 @@ set $term konsole
 set $fm thunar
 # Preferred Browser
 set $browser firefox
-# Your preferred application launcher : wofi
+# Your preferred application launcher : wofi but you use rofi : 'rofi -show drun -show icons'
 set $menu wofi --show drun
 
 ### Output configuration
