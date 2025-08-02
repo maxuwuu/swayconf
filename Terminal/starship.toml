@@ -1,0 +1,17 @@
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✘](bold red)"
+
+[username]
+style_user = "bold green"
+style_root = "bold yellow"
+format = "[$user]($style) "
+
+[directory]
+style = "${STARSHIP_DIR_STYLE:-bold green}"  
+format = "[$path]($style) "
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "bold white"
