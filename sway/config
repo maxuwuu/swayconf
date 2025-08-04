@@ -25,11 +25,11 @@ set $menu wofi --show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/walls/Anime/Girl with bones.png fill
+output * bg ~/walls/Anime/Girl-with-bones.png fill
 #
 # Example configuration:
 #
-#   output Virtual-1 resolution 1920x1080 position 1920,0
+  output Virtual-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -79,9 +79,6 @@ input * {
 
     # Start your File Manager
     bindsym $mod+shift+d exec $fm
-
-    # Start your browser
-    bindsym $mod+f exec $browser
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
