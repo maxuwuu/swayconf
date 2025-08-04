@@ -1,3 +1,0 @@
-#!/bin/bash
-ans=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "LOG OUT ?")
-[ "$ans" = "Yes" ] && swaymsg exit
