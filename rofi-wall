@@ -5,16 +5,14 @@ CONFIG_FILE="$HOME/.config/wallpaper.conf"
 
 mkdir -p "$HOME/.config"
 
-# Rofi ile seçim yap
-selected=$(ls "$WALLPAPER_DIR" | rofi -dmenu -p "Select Wallpaper")
+# Resim dosyalarını filtrele (jpg, png, jpeg)
+files=$(find "$WALLPAPER_DIR" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \) -printf '%f\n')
+
+# Rofi ile seçim
+selected=$(echo "$files" | rofi -dmenu -p "Select Wallpaper")
 
 if [[ -n "$selected" ]]; then
-    # swaybg varsa önce kapat
     pkill swaybg 2>/dev/null
-
-    # Yeni duvar kağıdını uygula
     swaybg -i "$WALLPAPER_DIR/$selected" -m fill &
-
-    # Seçilen duvar kağıdını kaydet
     echo "$WALLPAPER_DIR/$selected" > "$CONFIG_FILE"
 fi
