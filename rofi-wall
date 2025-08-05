@@ -1,18 +1,12 @@
 #!/bin/bash
 
-WALLPAPER_DIR="$HOME/Walls"
-CONFIG_FILE="$HOME/.config/wallpaper.conf"
+WALLPAPER_DIR="$HOME/walls"
 
-mkdir -p "$HOME/.config"
+FILES=$(find "$WALLPAPER_DIR" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \))
 
-# Resim dosyalarını filtrele (jpg, png, jpeg)
-files=$(find "$WALLPAPER_DIR" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \) -printf '%f\n')
-
-# Rofi ile seçim
-selected=$(echo "$files" | rofi -dmenu -p "Select Wallpaper")
+selected=$(echo "$FILES" | xargs -n1 basename | rofi -dmenu -p "Select Wallpaper")
 
 if [[ -n "$selected" ]]; then
-    pkill swaybg 2>/dev/null
+    pkill swaybg
     swaybg -i "$WALLPAPER_DIR/$selected" -m fill &
-    echo "$WALLPAPER_DIR/$selected" > "$CONFIG_FILE"
 fi
