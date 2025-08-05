@@ -1,10 +1,20 @@
 #!/bin/bash
 
-WALLPAPER_DIR="$HOME/Wallpapers"
+WALLPAPER_DIR="$HOME/Walls"
+CONFIG_FILE="$HOME/.config/wallpaper.conf"
 
+mkdir -p "$HOME/.config"
+
+# Rofi ile seçim yap
 selected=$(ls "$WALLPAPER_DIR" | rofi -dmenu -p "Select Wallpaper")
 
 if [[ -n "$selected" ]]; then
-    pkill swaybg
+    # swaybg varsa önce kapat
+    pkill swaybg 2>/dev/null
+
+    # Yeni duvar kağıdını uygula
     swaybg -i "$WALLPAPER_DIR/$selected" -m fill &
+
+    # Seçilen duvar kağıdını kaydet
+    echo "$WALLPAPER_DIR/$selected" > "$CONFIG_FILE"
 fi
