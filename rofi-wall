@@ -1,0 +1,10 @@
+#!/bin/bash
+
+WALLPAPER_DIR="$HOME/Wallpapers"
+
+selected=$(ls "$WALLPAPER_DIR" | rofi -dmenu -p "Select Wallpaper")
+
+if [[ -n "$selected" ]]; then
+    pkill swaybg
+    swaybg -i "$WALLPAPER_DIR/$selected" -m fill &
+fi
