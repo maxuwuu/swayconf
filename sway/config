@@ -75,7 +75,10 @@ input * {
     bindsym $mod+shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec $menu 
+
+    # Select Wallpeper 
+    bindsym $mod+w exec ~/.config/sway/wallpeper-rofi
 
     # Start your File Manager
     bindsym $mod+shift+d exec $fm
