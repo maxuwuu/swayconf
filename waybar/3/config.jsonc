@@ -228,13 +228,6 @@
            "VeryCloudy": ""
         }
     },
-
-
-    "custom/help": {
-        "format": "",
-        "on-click": "~/.config/waybar/3/scripts/help.sh --toggle",
-        "tooltip": "false"
-    },
     
     "tray": {
         "icon-size": 21,
