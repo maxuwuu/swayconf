@@ -73,18 +73,15 @@ window#waybar.hidden {
 }
 
 #clock,
-#custom-help,
 #custom-playerctl,
 #custom-power,
 #custom-weather,
-#custom-wlsunset,
 #custom-clipboard,
 #custom-menu,
 #custom-dnd,
 #power-profiles-daemon,
 #battery,
 #cpu,
-#language,
 #memory,
 #network,
 #bluetooth,
@@ -178,11 +175,6 @@ label:focus {
 }
 
 #cpu {
-    background: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
-}
-
-#language {
     background: @theme_selected_bg_color;
     color: @theme_selected_fg_color;
 }
