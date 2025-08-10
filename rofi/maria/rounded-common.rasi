@@ -1,5 +1,5 @@
 * {
-  font: "Cantarell 12";
+  font: "Figtree 13";
 
   background-color: transparent;
   text-color: @fg;
