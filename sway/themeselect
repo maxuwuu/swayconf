@@ -1,0 +1,19 @@
+#!/bin/bash
+
+ROFI_THEMES="$HOME/.config/rofi"
+WAYBAR_THEMES="$HOME/.config/waybar"
+
+ROFI_CONFIG="$HOME/.config/rofi/config.rasi"
+WAYBAR_CONFIG="$HOME/.config/waybar/style.css"
+
+THEME=$(ls "$ROFI_THEMES" | rofi -dmenu -p "Select Theme")
+
+[ -z "$THEME" ] && exit
+
+[ -f "$ROFI_THEMES/$THEME/config.rasi" ] && cp "$ROFI_THEMES/$THEME/config.rasi" "$ROFI_CONFIG"
+[ -f "$WAYBAR_THEMES/$THEME/style.css" ] && cp "$WAYBAR_THEMES/$THEME/style.css" "$WAYBAR_CONFIG"
+
+pkill waybar
+waybar &
+
+notify-send "Theme changed" "$THEME"
