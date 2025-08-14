@@ -1,0 +1,47 @@
+#!/bin/bash
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    DISTRO=$ID
+    VARIANT=$VARIANT_ID
+else
+    DISTRO=$(uname -s)
+fi
+
+case "$DISTRO" in
+    fedora)
+        if [[ "$VARIANT" == *"silverblue"* || "$VARIANT" == *"kinoite"* || "$VARIANT" == *"atomic"* ]]; then
+            sudo rpm-ostree install git nano sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        else
+            sudo dnf install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        fi
+        ;;
+    ubuntu|debian|kali)
+        sudo apt update
+        sudo apt install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        ;;
+    arch|manjaro)
+        sudo pacman -Syu --noconfirm git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        ;;
+    opensuse*)
+        sudo zypper install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        ;;
+    gentoo)
+        sudo emerge --ask app-editors/nano app-editors/git sudo x11-wm/sway x11-wm/waybar wofi nwg-drawer rofi fastfetch curl
+        ;;
+    *)
+        echo "Unknown distribution, please install packages manually."
+        ;;
+esac
+
+curl -sS https://starship.rs/install.sh | sh
+git clone https://github.com/maxuwuu/walls.git ~/Downloads/walls
+git clone https://github.com/maxuwuu/swayconf.git ~/Downloads/swayconf
+
+cp -r ~/Downloads/swayconf/waybar/* ~/.config/waybar/
+cp -r ~/Downloads/swayconf/wofi/* ~/.config/wofi/
+cp -r ~/Downloads/swayconf/rofi/* ~/.config/rofi/
+cp -r ~/Downloads/swayconf/nwg-drawer/* ~/.config/nwg-drawer/
+cp -r ~/Downloads/swayconf/sway/* ~/.config/sway/
+cp -r ~/Downloads/swayconf/Terminal/fastfetch ~/.config/
+cp ~/Downloads/swayconf/Terminal/starship.toml ~/.config/starship.toml
+cat ~/Downloads/swayconf/Terminal/.bashrc >> ~/.bashrc
