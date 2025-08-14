@@ -10,17 +10,17 @@ fi
 case "$DISTRO" in
     fedora)
         if [[ "$VARIANT" == *"silverblue"* || "$VARIANT" == *"kinoite"* || "$VARIANT" == *"atomic"* ]]; then
-            sudo rpm-ostree install git nano sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config
+            sudo rpm-ostree install git nano sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config swaybg
         else
-            sudo dnf install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config
+            sudo dnf install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config swaybg
         fi
         ;;
     ubuntu|debian|kali)
         sudo apt update
-        sudo apt install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl build-essential meson ninja-build pkg-config
+        sudo apt install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl build-essential meson ninja-build pkg-config swaybg
         ;;
     arch|manjaro)
-        sudo pacman -Syu --noconfirm git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl base-devel meson ninja
+        sudo pacman -Syu --noconfirm git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl base-devel meson ninja swaybg
         if [[ "$DISTRO" == "manjaro" ]]; then
             sudo pacman -S --noconfirm yay
         else
@@ -33,10 +33,10 @@ case "$DISTRO" in
         fi
         ;;
     opensuse*)
-        sudo zypper install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl make gcc meson ninja-build pkg-config
+        sudo zypper install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl make gcc meson ninja-build pkg-config swaybg
         ;;
     gentoo)
-        sudo emerge --ask app-editors/nano app-editors/git sudo x11-wm/sway x11-wm/waybar wofi nwg-drawer fastfetch curl dev-util/meson dev-util/ninja
+        sudo emerge --ask app-editors/nano app-editors/git sudo x11-wm/sway x11-wm/waybar wofi nwg-drawer fastfetch curl dev-util/meson dev-util/ninja x11-misc/swaybg
         ;;
     *)
         echo "Unknown distribution, please install packages manually."
