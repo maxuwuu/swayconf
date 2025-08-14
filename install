@@ -10,23 +10,33 @@ fi
 case "$DISTRO" in
     fedora)
         if [[ "$VARIANT" == *"silverblue"* || "$VARIANT" == *"kinoite"* || "$VARIANT" == *"atomic"* ]]; then
-            sudo rpm-ostree install git nano sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+            sudo rpm-ostree install git nano sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config
         else
-            sudo dnf install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+            sudo dnf install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl meson ninja-build gcc make pkg-config
         fi
         ;;
     ubuntu|debian|kali)
         sudo apt update
-        sudo apt install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        sudo apt install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl build-essential meson ninja-build pkg-config
         ;;
     arch|manjaro)
-        sudo pacman -Syu --noconfirm git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        sudo pacman -Syu --noconfirm git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl base-devel meson ninja
+        if [[ "$DISTRO" == "manjaro" ]]; then
+            sudo pacman -S --noconfirm yay
+        else
+            if ! command -v yay &> /dev/null; then
+                git clone https://aur.archlinux.org/yay.git ~/Downloads/yay
+                cd ~/Downloads/yay
+                makepkg -si --noconfirm
+                cd ~
+            fi
+        fi
         ;;
     opensuse*)
-        sudo zypper install -y git nano sudo sway waybar wofi nwg-drawer nwg-look rofi-wayland fastfetch curl
+        sudo zypper install -y git nano sudo sway waybar wofi nwg-drawer nwg-look fastfetch curl make gcc meson ninja-build pkg-config
         ;;
     gentoo)
-        sudo emerge --ask app-editors/nano app-editors/git sudo x11-wm/sway x11-wm/waybar wofi nwg-drawer rofi fastfetch curl
+        sudo emerge --ask app-editors/nano app-editors/git sudo x11-wm/sway x11-wm/waybar wofi nwg-drawer fastfetch curl dev-util/meson dev-util/ninja
         ;;
     *)
         echo "Unknown distribution, please install packages manually."
@@ -36,6 +46,16 @@ esac
 curl -sS https://starship.rs/install.sh | sh
 git clone https://github.com/maxuwuu/walls.git ~/Downloads/walls
 git clone https://github.com/maxuwuu/swayconf.git ~/Downloads/swayconf
+
+if ! command -v rofi &> /dev/null; then
+    git clone --recursive https://github.com/in0ni/rofi-wayland.git ~/Downloads/rofi-wayland
+    cd ~/Downloads/rofi-wayland
+    mkdir -p build && cd build
+    meson ..
+    ninja
+    sudo ninja install
+    cd ~
+fi
 
 cp -r ~/Downloads/swayconf/waybar/* ~/.config/waybar/
 cp -r ~/Downloads/swayconf/wofi/* ~/.config/wofi/
