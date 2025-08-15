@@ -24,7 +24,7 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 eval "$(starship init bash)"
-neofetch
+fastfetch
 
 detect_package_manager() {
     if command -v apt &> /dev/null; then
